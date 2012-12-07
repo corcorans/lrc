@@ -1,4 +1,4 @@
 Lua-Roman-Converter
 ===================
 
-A roman numeral converter in lua
+A simple roman numeral converter in lua which will take a roman numeral and return the integer value
