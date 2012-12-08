@@ -63,13 +63,14 @@ end
 -- @return: the roman numeral equivalence of the integer passed in.
 function to_roman(number)
   local Roman_Values ={ {1000, "M"}, {500, "D"}, {100, "C"}, {50, "L"}, {10, "X"}, {5, "V"}, {1, "I"} }
-  local roman_numeral = ""
+  local roman_numeral = " "
+  number = math.abs(number)
   
   for i,v in ipairs(Roman_Values) do
     value, roman = unpack(Roman_Values[i])
     while number >= value do
       number = number - value
-      roman_numeral = io.write(roman)
+      roman_numeral = roman_numeral .. tostring(roman)
     end
   end
   return roman_numeral
@@ -80,6 +81,7 @@ local roman = read_roman()
 local operator = read_operator()
 local roman2 = read_roman()
 local final_num = final_numeral(roman, roman2, operator)
+local final_roman = to_roman(tonumber(final_num))
 
 print(" ")
 print("Math equivalence: ")
@@ -87,5 +89,11 @@ print(roman .. " " .. operator .. " " .. roman2 .. " = " .. final_num)
 print(" ")
 
 print("Roman numeral equivalence")
-output = to_roman(tonumber(final_num))
+
+-- Handles the negative sign and when the result is 0.
+if final_num < 0 then print("-" .. final_roman)
+elseif final_num == 0 then print (0)
+else print(final_roman)
+end
+
 print("\n")
