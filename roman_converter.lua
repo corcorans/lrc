@@ -19,8 +19,8 @@ function final_numeral(roman, roman2, operator)
   elseif operator == "*" then
     return to_numeral(roman) * to_numeral(roman2)
   elseif operator == "/" then
-    if (to_numeral(roman) / to_numeral(roman2)) < 1 then
-      return 0
+    if (to_numeral(roman) / to_numeral(roman2)) < 1 then return 0
+    else return to_numeral(roman) / to_numeral(roman2)
     end
   end
 end
@@ -61,8 +61,8 @@ function to_numeral(roman_numeral)
     if counter <= length then 
       numeral = numeral + Integer_Values[ string.sub(roman_numeral, counter, counter) ] 
     end
- 
-    return numeral    
+
+    return tonumber(numeral)    
 end
 
 -- Converts a number to a roman numeral character
