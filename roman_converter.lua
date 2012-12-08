@@ -14,8 +14,14 @@ end
 function final_numeral(roman, roman2, operator)
   if operator == "+" then
     return to_numeral(roman) + to_numeral(roman2)
-  else
+  elseif operator == "-" then
     return to_numeral(roman) - to_numeral(roman2)
+  elseif operator == "*" then
+    return to_numeral(roman) * to_numeral(roman2)
+  elseif operator == "/" then
+    if (to_numeral(roman) / to_numeral(roman2)) < 1 then
+      return 0
+    end
   end
 end
 
@@ -86,13 +92,14 @@ local final_roman = to_roman(tonumber(final_num))
 print(" ")
 print("Math equivalence: ")
 print(roman .. " " .. operator .. " " .. roman2 .. " = " .. final_num)
+print(to_numeral(roman) .. " " .. operator .. " " .. to_numeral(roman2) .. " = " .. final_num)
 print(" ")
 
 print("Roman numeral equivalence")
 
 -- Handles the negative sign and when the result is 0.
 if final_num < 0 then print("-" .. final_roman)
-elseif final_num == 0 then print (0)
+elseif final_num == 0 then print ("Zero")
 else print(final_roman)
 end
 
