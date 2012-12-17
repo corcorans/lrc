@@ -6,6 +6,7 @@ function read_roman()
       io.write("Please enter a roman numeral: ")
       roman_numeral = io.read()
     until roman_numeral ~= " "
+
   return roman_numeral
 end
 
@@ -33,6 +34,7 @@ function read_operator()
     io.write("Enter an operator: ")
     operator = io.read()
   until operator ~= " "
+
   return operator
 end
 
@@ -40,29 +42,19 @@ end
 -- @param: a roman numeral
 -- @return: returns the numeral value of the roman numeral(s)
 function to_numeral(roman_numeral)
-    local Integer_Values = { ["M"] = 1000, ["D"] = 500, ["C"] = 100, ["L"] = 50, ["X"] = 10, ["V"] = 5, ["I"] = 1 }
-    local numeral = 0    
- 
-    local counter = 1
-    local length = string.len(roman_numeral)
-    while counter < length do
-        local num1 = Integer_Values[ string.sub(roman_numeral, counter, counter) ]
-        local num2 = Integer_Values[ string.sub(roman_numeral, counter+1, counter+1) ]
-        
-        if num1 < num2 then
-            numeral = numeral + ( num2 - num1 )
-            counter = counter + 2
-        else
-            numeral = numeral + num1
-            counter = counter + 1    
-        end        
+  local Integer_Values = { {"M", 1000}, {"D", 500}, {"C", 100}, {"L", 50}, {"X", 10}, {"V", 5}, {"I", 1} }
+  local integer = 0;
+  
+  for i, v in ipairs(Integer_Values) do
+    roman, value = unpack(Integer_Values[i])
+    for char = 1, string.len(roman_numeral) do
+      if roman == string.sub(roman_numeral, char, char) then
+        integer = integer + value
+      end
     end
- 
-    if counter <= length then 
-      numeral = numeral + Integer_Values[ string.sub(roman_numeral, counter, counter) ] 
-    end
+  end
 
-    return tonumber(numeral)    
+  return tonumber(integer)   
 end
 
 -- Converts a number to a roman numeral character
@@ -79,6 +71,7 @@ function to_roman(number)
       roman_numeral = roman_numeral .. tostring(roman)
     end
   end
+
   return roman_numeral
 end
 
